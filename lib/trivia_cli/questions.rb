@@ -16,10 +16,10 @@ class Question
             puts "#{index + 1}: #{answer}"
         end
     end
-    def self.from_opentdb(category = 9) # 
+    def self.from_opentdb(amount, category) # 
         questions = []
     
-        api = API.new("api.php", options: {amount: 10, category: category})
+        api = API.new("api.php", options: {amount: amount, category: category})
     
         json = api.get_data()
     
@@ -27,7 +27,7 @@ class Question
           questions << self.new(
             question["question"], 
             question["correct_answer"],
-            question["incorrect_answer"]
+            question["incorrect_answers"]
           )
         end
     

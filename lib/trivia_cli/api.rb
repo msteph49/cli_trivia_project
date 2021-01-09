@@ -7,7 +7,7 @@
 # trivia_array["results"][0]["type"]
 require 'pry'
 class API
-
+    attr_accessor :options
     def initialize(resource, options:)
         @resource = resource # base url
         @options = options # input for category and num of questions

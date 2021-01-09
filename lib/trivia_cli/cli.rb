@@ -3,7 +3,7 @@ require 'pry'
 
 
 class CLI
-
+    attr_accessor :amount, :category
     def start
         api = API.new("api.php", options: {amount: 1})
         api.get_data
@@ -37,7 +37,7 @@ class CLI
         menu #recursion, keeping the user looped in the program
     end
     def category_selection
-        puts "Select a category" #possible duplicate, folling along class presentation
+        puts "Select a category" #possible duplicate, following along class presentation
         selection = user_input
         selection = selection.to_i
         # selection.to_i
@@ -46,6 +46,7 @@ class CLI
             puts "You have entered an invalid response"
             category_selection
             else
+                @category = Category.from_opentdb[selection -1].id
                 puts "You have selected #{Category.from_opentdb[selection - 1].name}"
         end
         how_many_questions
@@ -61,12 +62,18 @@ class CLI
             puts "You have entered an invalid response, please try again."
             how_many_questions
         else
+            @amount = selection
             puts "You have selected #{selection} questions"
         end
         play_game
     end
     def play_game
         binding.pry
+        questions = Question.from_opentdb(@amount, @category)
+        questions.each do |question|
+            puts question.question
+            puts question.answers
+        end
     end
 
     def menu
