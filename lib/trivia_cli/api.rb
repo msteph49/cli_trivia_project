@@ -9,8 +9,8 @@ require 'pry'
 class API
 
     def initialize(resource, options:)
-        @resource = resource
-        @options = options
+        @resource = resource # base url
+        @options = options # input for category and num of questions
     end
 
     def uri

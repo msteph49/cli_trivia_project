@@ -7,7 +7,7 @@ class Question
         @question = question
         @correct_answer = correct_answer
         @incorrect_answer = incorrect_answer
-        @answers = [[correct_answer] + incorrect_answer].flatten.shuffle
+        @answers = [incorrect_answer + [correct_answer]].flatten.shuffle
     end
    
     def puts_answers
@@ -16,7 +16,25 @@ class Question
             puts "#{index + 1}: #{answer}"
         end
     end
-    def self.get_data
-
+    def self.from_opentdb(category = 9) # 
+        questions = []
+    
+        api = API.new("api.php", options: {amount: 10, category: category})
+    
+        json = api.get_data()
+    
+        json["results"].each do |question|
+          questions << self.new(
+            question["question"], 
+            question["correct_answer"],
+            question["incorrect_answer"]
+          )
+        end
+    
+        questions
+    
     end
+    # def self.get_data
+
+    # end
 end

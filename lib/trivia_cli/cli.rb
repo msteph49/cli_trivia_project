@@ -63,6 +63,10 @@ class CLI
         else
             puts "You have selected #{selection} questions"
         end
+        play_game
+    end
+    def play_game
+        binding.pry
     end
 
     def menu
