@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/enviroment.rb'
+
+
+# this line of code invokes the start method
+# cli = CLI.new 
+# cli.start
+cli = CLI.new.start
