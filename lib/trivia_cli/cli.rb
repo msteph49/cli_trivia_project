@@ -10,7 +10,7 @@ class CLI
         api.get_data
 
         puts "Welcome to CLI Trivia!"
-        puts "So I know who is playing please tell me your name."
+        puts "So I will know who is playing, please tell me your name."
         
         greet(user_input)
     end
@@ -20,7 +20,7 @@ class CLI
     def greet(name)
         puts "Hi #{name.capitalize}, lets get started"
         puts "We have several fun categories for you to choose from, would you like to see a menu?"
-        puts "Input 'y' to see the list, if at any point you want to leave the app type 'exit'"
+        puts "Enter 'y' to see the list, or enter 'exit' to leave the app."
         menu
     end
     def trivia_categorie_list
@@ -34,16 +34,16 @@ class CLI
         puts "Bye for now."
     end
     def invalid
-        puts "Invalid input, please try again"
+        puts "Invalid response, please try again"
         menu 
     end
     def category_selection
-        puts "Select a category" 
+        puts "Please select a category" 
         selection = user_input
         selection = selection.to_i
 
         if selection == 0 || selection > Category.from_opentdb.count
-            puts "You have entered an invalid response"
+            puts "You have entered an invalid response, please try again."
             category_selection
             else
                 @category = Category.from_opentdb[selection -1].id
@@ -53,7 +53,7 @@ class CLI
 
     end
     def how_many_questions
-        puts "How many questions would you like to answer, please enter a number 5-10"
+        puts "How many questions would you like to answer, please enter a number between 5 and 10"
         selection = user_input
         if selection == "exit"
             goodbye
@@ -84,7 +84,7 @@ class CLI
     
         if user_answer <= 0 || user_answer > question.answers.size
     
-            puts "Invalid"
+            puts "Invalid response. Please try again."
             check_answer(question)
             return 
         end
@@ -93,7 +93,7 @@ class CLI
     
         @guesses << guess
         if guess == true
-            puts "Your guess was correct"
+            puts "Your guess was correct!"
         else
         puts "Incorrect.The correct answer was #{question.correct_answer}"
         end
@@ -104,16 +104,16 @@ class CLI
         if 100 / @amount.to_i * @guesses.count(true) == 100
             puts "Great Job! You got a perfect score!!!"
         elsif 100 / @amount.to_i * @guesses.count(true) < 100 && @amount.to_i * @guesses.count(true) >= 80
-            puts "Good Job! You got #{@gusses.count(true)} out of #{@amount} correct!"
+            puts "Good Job! You got #{@guesses.count(true)} out of #{@amount} correct!"
         elsif 100 / @amount.to_i * @guesses.count(true) < 80 && @amount.to_i * @guesses.count(true) >= 60
-            puts "Not bad. You got #{@gusses.count(true)} out of #{@amount} correct." 
+            puts "Not bad. You got #{@guesses.count(true)} out of #{@amount} correct." 
         else 100 / @amount.to_i * @guesses.count(true) < 60 && @amount.to_i * @guesses.count(true) >= 0
             puts "You got #{@guesses.count(true)} out of #{@amount} correct. Try again and improve your score next time!"
         end
         play_again
     end
     def play_again
-        puts "Would you like to play again, enter 'y' to play again or 'exit' to end game"
+        puts "Would you like to play again? Enter 'y' to play again or 'exit' to end game"
         response = user_input
         response = response.downcase
         if response == "y"

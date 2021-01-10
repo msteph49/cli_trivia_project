@@ -16,9 +16,7 @@ class Question
             puts "#{index + 1}: #{answer}"
         end
     end
-    # def gets_answer
-    #     binding.pry
-    # end
+
     def guesses(index)
         answers[index] == correct_answer
     end
@@ -40,7 +38,5 @@ class Question
         questions
     
     end
-    # def self.get_data
 
-    # end
 end

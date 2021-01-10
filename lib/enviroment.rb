@@ -9,7 +9,7 @@ puts "in enviroment"
 
 require_relative "./trivia_cli/cli"
 require_relative "./trivia_cli/api"
-require_relative "./trivia_cli/trivia"
+# require_relative "./trivia_cli/trivia"
 require_relative "./trivia_cli/questions"
 require_relative "./trivia_cli/category"
 
