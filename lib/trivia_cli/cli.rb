@@ -117,7 +117,7 @@ class CLI
         response = user_input
         response = response.downcase
         if response == "y"
-        puts "restarting..."
+        puts "Restarting..."
         @guesses.clear
         @amount = 0
         start
