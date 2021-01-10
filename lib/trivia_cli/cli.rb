@@ -78,25 +78,30 @@ class CLI
             question.puts_answers
             check_answer(question)
         end
+        results
     end
     def check_answer(question)
+
         user_answer = user_input
         user_answer = user_answer.to_i
-
+    
+    
         if user_answer <= 0 || user_answer > question.answers.size
+    
             puts "Invalid"
             check_answer(question)
-            return
+            return # fixed issue of invalid answers added to array 
         end
-        guess = question.guesses(user_answer - 1)
+        
+        guess = question.guesses(user_answer -1)
+        # binding.pry
         @guesses << guess
         if guess == true
             puts "Your guess was correct"
         else
-            puts "Incorrect. The correct answer was #{question.correct_answer}"
-
+        puts "Incorrect.The correct answer was #{question.correct_answer}"
         end
-        results
+        
     end
     def results
 
@@ -109,10 +114,28 @@ class CLI
         else 100 / @amount.to_i * @guesses.count(true) < 60 && @amount.to_i * @guesses.count(true) >= 0
             puts "You got #{@guesses.count(true)} out of #{@amount} correct. Try again and improve your score next time!"
         end
-        
+        play_again
     end
+    def play_again
+        puts "Would you like to play again, enter 'y' to play again or 'exit' to end game"
+        response = user_input
+        response = response.downcase
+        if response == "y"
+        puts "restarting..."
+        @guesses.clear
+        @amount = 0
+        start
+        elsif response == "exit"
+            goodbye
+        else
+            puts "You have entered an invalid response please try again."
+            play_again
+        end
+    end
+
     def menu
         selection = user_input
+        selection = selection.downcase
 
         if selection == 'y' # || 'yes'
             trivia_categorie_list
