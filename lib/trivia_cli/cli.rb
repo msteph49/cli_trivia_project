@@ -69,7 +69,13 @@ class CLI
         make_questions
     end
     def make_questions
-        
+        # binding.pry
+        questions = Question.from_opentdb(@amount, @category)
+        questions.each_with_index do |question, index|
+            puts question.question
+            question.puts_answers
+            
+        end
     end
     def menu
         selection = user_input
