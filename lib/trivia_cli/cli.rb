@@ -4,7 +4,9 @@ require 'pry'
 
 class CLI
     attr_accessor :amount, :category, :guesses
-   
+    def initialize
+        @guesses = []
+    end
     def start
         api = API.new("api.php", options: {amount: 1})
         api.get_data
@@ -74,6 +76,25 @@ class CLI
         questions.each_with_index do |question, index|
             puts question.question
             question.puts_answers
+            check_answer(question)
+        end
+    end
+    def check_answer(question)
+        user_answer = user_input
+        user_answer = user_answer.to_i
+
+        if user_answer <= 0 || user_answer > question.answers.size
+            puts "Invalid"
+            check_answer(question)
+        end
+        guess = question.guesses(user_answer - 1)
+        @guesses << guess
+        if guess == true
+            puts "Your guess was correct"
+        else
+            puts "Incorrect. The correct answer was #{question.correct_answer}"
+            
+            
             
         end
     end
