@@ -123,9 +123,11 @@ class CLI
         start
         elsif response == "exit"
             goodbye
+            return
         else
             puts "You have entered an invalid response please try again."
             play_again
+            return
         end
     end
 
