@@ -86,6 +86,7 @@ class CLI
         if user_answer <= 0 || user_answer > question.answers.size
             puts "Invalid"
             check_answer(question)
+            return
         end
         guess = question.guesses(user_answer - 1)
         @guesses << guess
@@ -93,10 +94,22 @@ class CLI
             puts "Your guess was correct"
         else
             puts "Incorrect. The correct answer was #{question.correct_answer}"
-            
-            
-            
+
         end
+        results
+    end
+    def results
+
+        if 100 / @amount.to_i * @guesses.count(true) == 100
+            puts "Great Job! You got a perfect score!!!"
+        elsif 100 / @amount.to_i * @guesses.count(true) < 100 && @amount.to_i * @guesses.count(true) >= 80
+            puts "Good Job! You got #{@gusses.count(true)} out of #{@amount} correct!"
+        elsif 100 / @amount.to_i * @guesses.count(true) < 80 && @amount.to_i * @guesses.count(true) >= 60
+            puts "Not bad. You got #{@gusses.count(true)} out of #{@amount} correct." 
+        else 100 / @amount.to_i * @guesses.count(true) < 60 && @amount.to_i * @guesses.count(true) >= 0
+            puts "You got #{@guesses.count(true)} out of #{@amount} correct. Try again and improve your score next time!"
+        end
+        
     end
     def menu
         selection = user_input
