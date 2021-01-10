@@ -1,8 +1,7 @@
 # TriviaCli
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/trivia_cli`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Welcome to Command Line Trivia where you can test your knowledge of multiple categories of trivia. To start the game enter './bin/run' Upon starting the game you will need to provide you name and when prompted enter 'y' to see the trivia categories.
+You will then enter the number associated with the category you want to use. Lastly you will be given a mixture of multiple choice and True/False question. To submit your answer enter the number that corresponds with your choice. 
 
 ## Installation
 
@@ -32,5 +31,5 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/trivia_cli.
+Bug reports and pull requests are welcome on GitHub at https://github.com/msteph49/cli_trivia_project.
 

@@ -3,7 +3,8 @@ require 'pry'
 
 
 class CLI
-    attr_accessor :amount, :category
+    attr_accessor :amount, :category, :guesses
+   
     def start
         api = API.new("api.php", options: {amount: 1})
         api.get_data
@@ -54,28 +55,22 @@ class CLI
         # Trivia.find_category(selection)
     end
     def how_many_questions
-        puts "How many questions would you like to answer, please enter a number 10-20"
+        puts "How many questions would you like to answer, please enter a number 5-10"
         selection = user_input
         if selection == "exit"
             goodbye
-        elsif selection.to_i < 10 || selection.to_i > 20
+        elsif selection.to_i < 5 || selection.to_i > 10
             puts "You have entered an invalid response, please try again."
             how_many_questions
         else
             @amount = selection
             puts "You have selected #{selection} questions"
         end
-        play_game
+        make_questions
     end
-    def play_game
-        binding.pry
-        questions = Question.from_opentdb(@amount, @category)
-        questions.each do |question|
-            puts question.question
-            puts question.answers
-        end
+    def make_questions
+        
     end
-
     def menu
         selection = user_input
 
@@ -86,7 +81,7 @@ class CLI
         elsif selection == 'exit'
             # prompt goodbye message
             goodbye
-        else
+        else 
             invalid
             # invalid output, make user select again
         end
