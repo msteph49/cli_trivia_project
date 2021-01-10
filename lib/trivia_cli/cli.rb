@@ -1,9 +1,7 @@
-# responsible for commuicating between user and data
-require 'pry'
 
 
 class CLI
-    attr_accessor :amount, :category, :guesses
+    attr_accessor :amount, :category
     def initialize
         @guesses = []
     end
@@ -13,7 +11,7 @@ class CLI
 
         puts "Welcome to CLI Trivia!"
         puts "So I know who is playing please tell me your name."
-        # binding.pry
+        
         greet(user_input)
     end
     def user_input
@@ -26,7 +24,7 @@ class CLI
         menu
     end
     def trivia_categorie_list
-        # This array will be reliant on the instance of api calls
+        
         Category.from_opentdb.each.with_index(1) do |category, i|
             puts "#{i}. #{category.name}"
         end
@@ -37,14 +35,13 @@ class CLI
     end
     def invalid
         puts "Invalid input, please try again"
-        menu #recursion, keeping the user looped in the program
+        menu 
     end
     def category_selection
-        puts "Select a category" #possible duplicate, following along class presentation
+        puts "Select a category" 
         selection = user_input
         selection = selection.to_i
-        # selection.to_i
-        # binding.pry
+
         if selection == 0 || selection > Category.from_opentdb.count
             puts "You have entered an invalid response"
             category_selection
@@ -53,8 +50,7 @@ class CLI
                 puts "You have selected #{Category.from_opentdb[selection - 1].name}"
         end
         how_many_questions
-        # query  trivia class 
-        # Trivia.find_category(selection)
+
     end
     def how_many_questions
         puts "How many questions would you like to answer, please enter a number 5-10"
@@ -71,7 +67,7 @@ class CLI
         make_questions
     end
     def make_questions
-        # binding.pry
+        
         questions = Question.from_opentdb(@amount, @category)
         questions.each_with_index do |question, index|
             puts question.question
@@ -90,11 +86,11 @@ class CLI
     
             puts "Invalid"
             check_answer(question)
-            return # fixed issue of invalid answers added to array 
+            return 
         end
         
         guess = question.guesses(user_answer -1)
-        # binding.pry
+    
         @guesses << guess
         if guess == true
             puts "Your guess was correct"
@@ -139,14 +135,11 @@ class CLI
 
         if selection == 'y' # || 'yes'
             trivia_categorie_list
-            
-            # print list of categories
         elsif selection == 'exit'
-            # prompt goodbye message
             goodbye
         else 
             invalid
-            # invalid output, make user select again
+            
         end
     end
 end

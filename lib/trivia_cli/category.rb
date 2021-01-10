@@ -1,4 +1,4 @@
-class Category # < Model
+class Category 
     attr_accessor :id, :name 
 
     def initialize(id:, name:)
